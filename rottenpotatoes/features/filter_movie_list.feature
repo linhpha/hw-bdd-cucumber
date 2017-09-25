@@ -20,10 +20,11 @@ Background: movies have been added to database
   | Chicken Run             | G      | 21-Jun-2000  |
 
   And  I am on the RottenPotatoes home page
-  # Then 10 seed movies should exist
+  Then 10 seed movies should exist
 
 Scenario: restrict to movies with 'PG' or 'R' ratings
   When I check the following ratings: PG, R 
+  And I uncheck the following ratings: G, PG-13, NC-17
   And I press "Refresh"
   Then I should see "The Terminator"
   And I should see "When Harry Met Sally"
@@ -31,15 +32,15 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   And I should see "The Incredibles"
   And I should see "Raiders of the Lost Ark"
    # enter step(s) to ensure that other movies are not visible
-  # And I should not see "Aladdin"
-  # And I should not see "The Help"
-  # And I should not see "Chocolat"
-  # And I should not see "2001: A Space Odyssey"
-  # And I should not see "Chicken Run"
+  And I should not see "Aladdin"
+  And I should not see "The Help"
+  And I should not see "Chocolat"
+  And I should not see "2001: A Space Odyssey"
+  And I should not see "Chicken Run"
 
 
 Scenario: all ratings selected
   When I am on the RottenPotatoes home page
   When I check the following ratings: G, R, PG-13, PG
-  When I press "ratings_submit"
+  When I press "Refresh"
   Then I should see all the movies
